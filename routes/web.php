@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,11 @@ Route::get('/formulario', 'PeliculaController@formulario');
 Route::post('/recibir', 'PeliculaController@recibir');
 
 Route::resource('usuario', 'UsuarioController');
+
+//Rutas de fruta
+Route::group(['prefix' => 'frutas'], function () {
+    Route::get('index', 'FrutaController@index');
+});
 
 /*
 

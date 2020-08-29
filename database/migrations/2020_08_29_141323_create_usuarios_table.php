@@ -13,7 +13,7 @@ class CreateUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('usuarios', function (Blueprint $table) {
+        /*Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre', 255);
             $table->string('email', 255);
@@ -21,7 +21,15 @@ class CreateUsuariosTable extends Migration
             $table->integer('edad');
             $table->float('sueldo');
             $table->timestamps();
-        });
+        });*/
+
+        DB::statement("CREATE TABLE usuarios(
+            id int(255) auto_increment not null,
+            nombre varchar(255),
+            email varchar(255),
+            password varchar(255),
+            primary key(id)
+        );");
     }
 
     /**
