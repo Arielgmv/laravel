@@ -20,6 +20,20 @@ Route::get('/', function () {
 
 Route::get('/peliculas/{pagina?}', 'PeliculaController@index');
 
+Route::get('/detalle/{year?}', [
+    'middleware' => 'testyear',
+    'uses' => 'PeliculaController@detalle',
+    'as' => 'detalle.pelicula'
+    ]);
+
+Route::get('/redirigir', 'PeliculaController@redirigir');
+
+Route::get('/formulario', 'PeliculaController@formulario');
+
+Route::post('/recibir', 'PeliculaController@recibir');
+
+Route::resource('usuario', 'UsuarioController');
+
 /*
 
  * GET: Conseguir datos
