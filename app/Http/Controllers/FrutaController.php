@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\DB;
 class FrutaController extends Controller
 {
     public function index(){
-        $frutas = DB::table('frutas')->get();
+        $frutas = DB::table('frutas')
+                ->orderBy('id','desc')
+                ->get();
 
         return view('fruta.index', [
             'frutas' => $frutas
@@ -23,5 +25,25 @@ class FrutaController extends Controller
         return view('fruta.detail',[
             'fruta'=>$fruta
         ]);
+    }
+
+    public function create(){
+        return view('fruta.create');
+    }
+
+    public function save(Request $request){
+        //guardar el registro
+        $fruta = DB::table('frutas')->insert(array(
+            'nombre' => $request->input('nombre'),
+            'descripcion' => $request->input('descripcion'),
+            'precio' => $request->input('precio'),
+            'fecha' => date('Y-m-d') 
+        ));
+        return redirect()->action('FrutaController@index')->with('status', 'Fruta creada correctamente');
+    }
+
+    public function delete($id){
+        $fruta = DB::table('frutas')->where('id', $id)->delete();
+        return redirect()->action('FrutaController@index')->with('status', 'Fruta borrada correctamente');
     }
 }
